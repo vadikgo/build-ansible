@@ -15,7 +15,7 @@ build-centos6:
   script:
     - curl -s https://gitlab.com/vladgo/omnibus-ansible/raw/master/ansible_install.sh | sh
     - ansible-playbook build-centos6-ansible.yml -e "result_dir=$CI_PROJECT_DIR"
-    - ls *.rpm | xargs -I {} sh -c "md5 -q {} > {}.md5"
+    #- ls *.rpm | xargs -I {} sh -c "md5sum -q {} > {}.md5"
   artifacts:
     paths:
     - '*.rpm'
@@ -24,7 +24,7 @@ build-centos6:
   stage: build
   script:
     - ansible-playbook build-centos7-ansible.yml -e "result_dir=$CI_PROJECT_DIR"
-    - ls *.rpm | xargs -I {} sh -c "md5 -q {} > {}.md5"
+    #- ls *.rpm | xargs -I {} sh -c "md5 -q {} > {}.md5"
   artifacts:
     paths:
     - '*.rpm'
