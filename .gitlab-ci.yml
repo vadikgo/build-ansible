@@ -16,6 +16,7 @@ build-centos6:
     - yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm -y
     - yum install python-pip -y
     - pip install ansible
+    - yum install which asciidoc tar "@Development tools" python-setuptools python2-devel libyaml-devel asciidoc git python-jinja2 python-sphinx python-markupsafe pytest -y
     - ansible-playbook build-centos6-ansible.yml -e "result_dir=$CI_PROJECT_DIR"
     - ls *.rpm | xargs -I {} sh -c "md5 -q {} > {}.md5"
   artifacts:
