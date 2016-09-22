@@ -1,4 +1,6 @@
-# ansible-docker-test
+# build ansible 
+
+[![build status](https://gitlab.com/vladgo/build-ansible/badges/master/build.svg)](https://gitlab.com/vladgo/build-ansible/commits/master)
 
 ### playbooks list
 

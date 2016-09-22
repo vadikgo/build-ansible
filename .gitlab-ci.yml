@@ -4,21 +4,23 @@ stages:
 lint-centos6:
   stage: lint
   script:
-    - ansible-lint -x "ANSIBLE0006" build-centos6-ansible.yml
-lint-centos7:
+    - ansible-lint -x "ANSIBLE0006" rebuild-centos6-ansible.yml
+.lint-centos7:
   stage: lint
   script:
     - ansible-lint -x "ANSIBLE0006" build-centos7-ansible.yml
 build-centos6:
+  image centos:6
   stage: build
   script:
+    - ansible --version
     - ansible-playbook build-centos6-ansible.yml -e "result_dir=$CI_PROJECT_DIR"
     - ls *.rpm | xargs -I {} sh -c "md5 -q {} > {}.md5"
   artifacts:
     paths:
     - '*.rpm'
     - '*.rpm.md5'
-build-centos7:
+.build-centos7:
   stage: build
   script:
     - ansible-playbook build-centos7-ansible.yml -e "result_dir=$CI_PROJECT_DIR"
