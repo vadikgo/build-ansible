@@ -1,7 +1,7 @@
 stages:
-  - lint
+#  - lint
   - build
-lint-centos6:
+.lint-centos6:
   stage: lint
   script:
     - ansible-lint -x "ANSIBLE0006" rebuild-centos6-ansible.yml
@@ -10,10 +10,12 @@ lint-centos6:
   script:
     - ansible-lint -x "ANSIBLE0006" build-centos7-ansible.yml
 build-centos6:
-  image centos:6
+  image: centos:6
   stage: build
   script:
-    - ansible --version
+    - yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm -y
+    - yum install python-pip -y
+    - pip install ansible
     - ansible-playbook build-centos6-ansible.yml -e "result_dir=$CI_PROJECT_DIR"
     - ls *.rpm | xargs -I {} sh -c "md5 -q {} > {}.md5"
   artifacts:

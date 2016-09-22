@@ -74,14 +74,3 @@
 
   vars:
         build_dir: /tmp/rpms-build
-
-- hosts: localhost
-  connection: local
-  gather_facts: no
-  tasks:
-    - name: destroy build container
-      docker_container:
-        name: "{{name}}"
-        state: absent
-  vars:
-      name: build-centos6
