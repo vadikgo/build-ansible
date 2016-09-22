@@ -28,7 +28,7 @@
           repo: https://github.com/ansible/ansible.git
           dest: "{{build_dir}}"
           recursive: yes
-          version: stable-2.1
+          version: "{{ansible_git_version}}"
 
       - name: Build rpm
         command: make rpm chdir={{build_dir}} creates={{build_dir}}/rpm-build
@@ -74,3 +74,4 @@
 
   vars:
         build_dir: /tmp/rpms-build
+        ansible_git_version: stable-2.1
