@@ -13,10 +13,7 @@ build-centos6:
   image: centos:6
   stage: build
   script:
-    - yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm -y
-    - yum install python-pip -y
-    - yum install which asciidoc tar "@Development tools" python-setuptools python2-devel libyaml-devel asciidoc git python-jinja2 python-sphinx python-markupsafe pytest -y
-    - curl -s https://raw.githubusercontent.com/neillturner/omnibus-ansible/master/ansible_install.sh | sh
+    - curl -s https://gitlab.com/vladgo/omnibus-ansible/raw/master/ansible_install.sh | sh
     - ansible-playbook build-centos6-ansible.yml -e "result_dir=$CI_PROJECT_DIR"
     - ls *.rpm | xargs -I {} sh -c "md5 -q {} > {}.md5"
   artifacts:
