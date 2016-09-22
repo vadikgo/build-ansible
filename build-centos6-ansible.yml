@@ -37,8 +37,8 @@
         find: paths="{{build_dir}}/rpm-build" patterns="*.rpm"
         register: rpms
 
-      - name: copy ansible rpms to {{build_dir}}
-        copy: src={{item.path}} dest={{build_dir}} remote_src=yes
+      - name: copy ansible rpms to {{result_dir}}
+        copy: src={{item.path}} dest={{result_dir}} remote_src=yes
         with_items: "{{rpms.files}}"
 
       - name: install epel
@@ -57,8 +57,8 @@
       - name: build python-jinja2
         command: rpmbuild -bb /root/rpmbuild/SPECS/python-jinja2.8-rh.spec creates=/root/rpmbuild/RPMS/noarch/python-jinja2-2.8-5.el6.noarch.rpm
 
-      - name: copy python-jinja2 rpm to {{build_dir}}
-        copy: src=/root/rpmbuild/RPMS/noarch/python-jinja2-2.8-5.el6.noarch.rpm dest={{build_dir}} remote_src=yes
+      - name: copy python-jinja2 rpm to {{result_dir}}
+        copy: src=/root/rpmbuild/RPMS/noarch/python-jinja2-2.8-5.el6.noarch.rpm dest={{result_dir}} remote_src=yes
 
       - name: install ansible-lint src rpm
         command: rpm -i https://dl.fedoraproject.org/pub/fedora/linux/updates/23/SRPMS/a/ansible-lint-3.2.5-1.fc23.src.rpm creates=/root/rpmbuild/SPECS/ansible-lint.spec
@@ -69,8 +69,8 @@
       - name: build ansible-lint
         command: rpmbuild -bb /root/rpmbuild/SPECS/ansible-lint-rh.spec creates=/root/rpmbuild/RPMS/noarch/ansible-lint-3.2.5-1.el6.noarch.rpm
 
-      - name: copy rpms to {{build_dir}}
-        copy: src=/root/rpmbuild/RPMS/noarch/ansible-lint-3.2.5-1.el6.noarch.rpm dest={{build_dir}} remote_src=yes
+      - name: copy rpms to {{result_dir}}
+        copy: src=/root/rpmbuild/RPMS/noarch/ansible-lint-3.2.5-1.el6.noarch.rpm dest={{result_dir}} remote_src=yes
 
   vars:
         build_dir: /tmp/rpms-build
