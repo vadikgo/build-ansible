@@ -7,7 +7,7 @@ lint:
   script:
     - ansible-lint -x "ANSIBLE0006" build-centos?-ansible.yml
 ansible-centos6:
-  image: scottmiller171/ansible-docker-images:centos-6
+  image: ansible/ansible:centos6
   stage: build
   script:
     - ansible-playbook build-centos6-ansible.yml -e "result_dir=$CI_PROJECT_DIR"
