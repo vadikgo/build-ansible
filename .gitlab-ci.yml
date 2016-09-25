@@ -10,6 +10,7 @@ ansible-centos6:
   image: ansible/ansible:centos6
   stage: build
   script:
+    - pip install ansible
     - ansible-playbook build-centos6-ansible.yml -e "result_dir=$CI_PROJECT_DIR"
   artifacts:
     paths:
