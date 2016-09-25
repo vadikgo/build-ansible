@@ -16,9 +16,10 @@ ansible-centos6:
     paths:
     - '*.rpm'
 ansible-centos7:
-  image: scottmiller171/ansible-docker-images:centos-7
+  image: ansible/ansible:centos7
   stage: build
   script:
+    - pip install ansible
     - ansible-playbook build-centos7-ansible.yml -e "result_dir=$CI_PROJECT_DIR"
   artifacts:
     paths:
