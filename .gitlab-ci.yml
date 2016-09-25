@@ -1,28 +1,23 @@
 stages:
-#  - lint
+  - lint
   - build
-.lint-centos6:
+lint:
+  image: stepanstipl/ansible
   stage: lint
   script:
-    - ansible-lint -x "ANSIBLE0006" rebuild-centos6-ansible.yml
-.lint-centos7:
-  stage: lint
-  script:
-    - ansible-lint -x "ANSIBLE0006" build-centos7-ansible.yml
+    - ansible-lint -x "ANSIBLE0006" rebuild-centos?-ansible.yml
 ansible-centos6:
-  image: centos:6
+  image: scottmiller171/ansible-docker-images:centos-6
   stage: build
   script:
-    - curl -s https://gitlab.com/vladgo/omnibus-ansible/raw/master/ansible_install.sh | sh
     - ansible-playbook build-centos6-ansible.yml -e "result_dir=$CI_PROJECT_DIR"
   artifacts:
     paths:
     - '*.rpm'
 ansible-centos7:
-  image: centos:7
+  image: scottmiller171/ansible-docker-images:centos-7
   stage: build
   script:
-    - curl -s https://gitlab.com/vladgo/omnibus-ansible/raw/master/ansible_install.sh | sh
     - ansible-playbook build-centos7-ansible.yml -e "result_dir=$CI_PROJECT_DIR"
   artifacts:
     paths:
