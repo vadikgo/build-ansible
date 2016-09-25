@@ -5,7 +5,7 @@ lint:
   image: stepanstipl/ansible
   stage: lint
   script:
-    - ansible-lint -x "ANSIBLE0006" rebuild-centos?-ansible.yml
+    - ansible-lint -x "ANSIBLE0006" build-centos?-ansible.yml
 ansible-centos6:
   image: scottmiller171/ansible-docker-images:centos-6
   stage: build
