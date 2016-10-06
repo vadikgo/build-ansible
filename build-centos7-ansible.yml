@@ -65,4 +65,4 @@
 
   vars:
         build_dir: /tmp/rpms-build
-        ansible_git_version: stable-2.1
+        ansible_git_version: stable-2.2
