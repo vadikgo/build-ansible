@@ -13,7 +13,6 @@
             - python-setuptools
             - python2-devel
             - libyaml-devel
-            - asciidoc
             - git
             - python-jinja2
             - python-sphinx
