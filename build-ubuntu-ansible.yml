@@ -10,7 +10,7 @@
       docker_container:
         name: "{{vmname}}"
         hostname: "{{vmname}}"
-        image: "ubuntu:latest"
+        image: "{{ubuntu_version}}"
         state: started
         tty: yes
         keep_volumes: no
@@ -27,6 +27,7 @@
   vars:
       vmname: build-ubuntu
       result_dir: "{{lookup('env','HOME')}}/dev/build-rpm"
+      ubuntu_version: "ubuntu:14.04"
 
 - hosts: build-ubuntu
   gather_facts: no
@@ -36,6 +37,7 @@
       with_items:
         - apt-get update
         - apt-get install python-minimal --yes
+      changed_when: no
 
 - hosts: build-ubuntu
   gather_facts: no
@@ -65,15 +67,23 @@
           repo: https://github.com/ansible/ansible.git
           dest: "{{build_dir}}"
           recursive: yes
+          version: "{{ansible_git_version}}"
 
       - name: Build deb
         command: make deb chdir={{build_dir}}
+        changed_when: yes
 
-      - name: copy deb to /vol1
-        shell: cp -fv {{build_dir}}/deb-build/unstable/*.deb /vol1/
+      - name: find debs
+        find: paths="{{build_dir}}/deb-build/unstable" patterns="*.deb"
+        register: debs
+
+      - name: copy debs to /vol1
+        copy: src={{item.path}} dest={{/vol1}} remote_src=yes
+        with_items: "{{debs.files}}"
 
   vars:
         build_dir: /tmp/deb-build
+        ansible_git_version: stable-2.2
 
 - hosts: localhost
   gather_facts: no
