@@ -6,7 +6,7 @@
       docker_container:
         name: "{{name}}"
         hostname: "{{name}}"
-        image: oraclelinux:6.8
+        image: oraclelinux:7
         state: started
         tty: yes
 
@@ -19,7 +19,7 @@
         groups: containers
       changed_when: false
   vars:
-      name: ubuntu
+      name: demo1
 
 
 - hosts: containers
@@ -35,4 +35,4 @@
         name: "{{name}}"
         state: absent
   vars:
-      name: ubuntu
+      name: demo1
