@@ -62,7 +62,7 @@
 
           - name: copy rpms to /vol1
             copy: src={{item.path}} dest={{result_dir}} remote_src=yes
-            with_items: "{{j2rpms.files}}"
+            with_items: "{{j2rpms.has_key('files') | ternary(j2rpms.files, [])}}"
         when: build_jinja2
 
   vars:
