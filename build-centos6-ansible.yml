@@ -71,8 +71,9 @@
 
         - name: copy rpms to {{result_dir}}
           copy: src=/root/rpmbuild/RPMS/noarch/ansible-lint-3.2.5-1.el6.noarch.rpm dest={{result_dir}} remote_src=yes
-        when: ansible_git_version != 'stable-2.2'
+        when: build_lint
 
   vars:
         build_dir: /tmp/rpms-build
         ansible_git_version: stable-2.2
+        build_lint: no

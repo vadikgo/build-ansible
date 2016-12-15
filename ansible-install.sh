@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # install ansible for rhel 6/7 from local network
-# curl -Lk https://sbt-qa-jenkins.sigma.sbrf.ru/opir/opir-stuff/raw/master/ansible/ansible-install.sh | sh
+# curl -Lk https://example.com/opir/opir-stuff/raw/master/ansible/ansible-install.sh | sh
 
 set -e
 

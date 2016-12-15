@@ -44,25 +44,28 @@
         copy: src={{item.path}} dest={{result_dir}} remote_src=yes
         with_items: "{{rpms.files}}"
 
-      - name: install jinja2 src rpm
-        command: rpm -i https://dl.dropboxusercontent.com/u/2296931/python-jinja2/python-jinja2-2.8-5.fc24.src.rpm?dl=1 creates=/root/rpmbuild/SPECS/python-jinja2.spec
+      - block:
+          - name: install jinja2 src rpm
+            command: rpm -i https://dl.dropboxusercontent.com/u/2296931/python-jinja2/python-jinja2-2.8-5.fc24.src.rpm?dl=1 creates=/root/rpmbuild/SPECS/python-jinja2.spec
 
-      - name: download spec file
-        get_url:
-          url: https://dl.dropboxusercontent.com/u/2296931/python-jinja2/python-jinja2.spec?dl=1
-          dest: /root/rpmbuild/SPECS/python-jinja2.spec
+          - name: download spec file
+            get_url:
+              url: https://dl.dropboxusercontent.com/u/2296931/python-jinja2/python-jinja2.spec?dl=1
+              dest: /root/rpmbuild/SPECS/python-jinja2.spec
 
-      - name: build python-jinja2
-        command: rpmbuild -bb /root/rpmbuild/SPECS/python-jinja2.spec creates=/root/rpmbuild/RPMS/noarch
+          - name: build python-jinja2
+            command: rpmbuild -bb /root/rpmbuild/SPECS/python-jinja2.spec creates=/root/rpmbuild/RPMS/noarch
 
-      - name: find jinja2 rpms
-        find: paths="/root/rpmbuild/RPMS/noarch" patterns="*.rpm"
-        register: j2rpms
+          - name: find jinja2 rpms
+            find: paths="/root/rpmbuild/RPMS/noarch" patterns="*.rpm"
+            register: j2rpms
 
-      - name: copy rpms to /vol1
-        copy: src={{item.path}} dest={{result_dir}} remote_src=yes
-        with_items: "{{j2rpms.files}}"
+          - name: copy rpms to /vol1
+            copy: src={{item.path}} dest={{result_dir}} remote_src=yes
+            with_items: "{{j2rpms.files}}"
+        when: build_jinja2
 
   vars:
         build_dir: /tmp/rpms-build
         ansible_git_version: stable-2.2
+        build_jinja2: no
