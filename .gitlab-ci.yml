@@ -12,8 +12,8 @@ ansible-centos6:
   script:
     - yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm -y
     - yum install ansible git -y
-    - TAG=$(git ls-remote --tags https://github.com/ansible/ansible.git refs/tags/*-1|tail -1|awk '{print $2}')
-    - ansible-playbook build-centos6-ansible.yml -e "result_dir=$CI_PROJECT_DIR ansible_git_version=$TAG"
+    - export TAG=$(git ls-remote --tags https://github.com/ansible/ansible.git refs/tags/*-1|tail -1|awk '{print $2}')
+    - ansible-playbook build-centos6-ansible.yml -v -e "result_dir=$CI_PROJECT_DIR ansible_git_version=$TAG"
   artifacts:
     paths:
     - '*.rpm'
@@ -23,8 +23,8 @@ ansible-centos7:
   script:
     - yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm -y
     - yum install ansible git -y
-    - TAG=$(git ls-remote --tags https://github.com/ansible/ansible.git refs/tags/*-1|tail -1|awk '{print $2}')
-    - ansible-playbook build-centos7-ansible.yml -e "result_dir=$CI_PROJECT_DIR ansible_git_version=$TAG"
+    - export TAG=$(git ls-remote --tags https://github.com/ansible/ansible.git refs/tags/*-1|tail -1|awk '{print $2}')
+    - ansible-playbook build-centos7-ansible.yml -v -e "result_dir=$CI_PROJECT_DIR ansible_git_version=$TAG"
   artifacts:
     paths:
     - '*.rpm'
