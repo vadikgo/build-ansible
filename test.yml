@@ -1,16 +1,13 @@
 ---
 - hosts: localhost
   connection: local
-  gather_facts: no
+  gather_facts: yes
   tasks:
     - name: application service
-      debug: msg="{{item[0]}}"
-      with_items: "{{users}}"
+      debug: msg="{{item}} {{users[item][0]}}"
+      with_items: "{{users.keys()}}"
   vars:
-      users:
-        alice:
-          - par1
-          - par2
-        bob:
-          - par3
-          - par4
+      users: "{
+        '{{ansible_hostname}}-alice': ['par1', 'par2'],
+        '{{ansible_hostname}}-bob': ['par3', 'par4']
+        }"
