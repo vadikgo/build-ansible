@@ -7,11 +7,9 @@ lint:
   script:
     - ansible-lint -x "ANSIBLE0006" build-centos?-ansible.yml
 ansible-centos6:
-  image: centos:6
+  image: ansible:centos6
   stage: build
   script:
-    - yum install https://dl.fedoraproject.org/pub/epel/epel-release -y
-    - yum install ansible git -y
     - export TAG=$(git ls-remote --tags https://github.com/ansible/ansible.git refs/tags/*-1|tail -1|awk '{print $2}'|cut -d / -f 3)
     - echo $TAG
     - ansible-playbook build-centos6-ansible.yml -v -e "result_dir=$CI_PROJECT_DIR ansible_git_version=$TAG"
@@ -19,11 +17,9 @@ ansible-centos6:
     paths:
     - '*.rpm'
 ansible-centos7:
-  image: centos:7
+  image: ansible:centos7
   stage: build
   script:
-    - yum install https://dl.fedoraproject.org/pub/epel/epel-release -y
-    - yum install ansible git -y
     - export TAG=$(git ls-remote --tags https://github.com/ansible/ansible.git refs/tags/*-1|tail -1|awk '{print $2}'|cut -d / -f 3)
     - echo $TAG
     - ansible-playbook build-centos7-ansible.yml -v -e "result_dir=$CI_PROJECT_DIR ansible_git_version=$TAG"
