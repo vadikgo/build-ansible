@@ -1,3 +1,5 @@
+variables:
+  TAG: stable-2.3
 stages:
   - lint
   - build
@@ -12,8 +14,8 @@ ansible-centos6:
   script:
     - yum install epel-release -y
     - yum install ansible -y
-    - export TAG=$(git ls-remote --tags https://github.com/ansible/ansible.git refs/tags/*-1|tail -1|awk '{print $2}'|cut -d / -f 3)
-    - echo $TAG
+    #- export TAG=$(git ls-remote --tags https://github.com/ansible/ansible.git refs/tags/*-1|tail -1|awk '{print $2}'|cut -d / -f 3)
+    #- echo $TAG
     - ansible-playbook build-centos6-ansible.yml -v -e "result_dir=$CI_PROJECT_DIR ansible_git_version=$TAG"
   artifacts:
     paths:
@@ -24,8 +26,8 @@ ansible-centos7:
   script:
     - yum install epel-release -y
     - yum install ansible -y
-    - export TAG=$(git ls-remote --tags https://github.com/ansible/ansible.git refs/tags/*-1|tail -1|awk '{print $2}'|cut -d / -f 3)
-    - echo $TAG
+    #- export TAG=$(git ls-remote --tags https://github.com/ansible/ansible.git refs/tags/*-1|tail -1|awk '{print $2}'|cut -d / -f 3)
+    #- echo $TAG
     - ansible-playbook build-centos7-ansible.yml -v -e "result_dir=$CI_PROJECT_DIR ansible_git_version=$TAG"
   artifacts:
     paths:
