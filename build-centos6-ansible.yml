@@ -75,5 +75,5 @@
 
   vars:
         build_dir: /tmp/rpms-build
-        ansible_git_version: stable-2.2
+        ansible_git_version: stable-2.3
         build_lint: no

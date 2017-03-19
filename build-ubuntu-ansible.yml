@@ -27,7 +27,7 @@
   vars:
       vmname: build-ubuntu
       result_dir: "{{lookup('env','HOME')}}/dev/build-rpm"
-      ubuntu_version: "ubuntu:14.04"
+      ubuntu_version: "ubuntu:16.04"
 
 - hosts: build-ubuntu
   gather_facts: no
@@ -57,6 +57,8 @@
             - devscripts
             - cdbs
             - debhelper
+            - python-sphinx
+            - pbuilder
       - name: install ansible repo
         apt_repository: repo='ppa:ansible/ansible'
       - name: create build dir
@@ -83,7 +85,7 @@
 
   vars:
         build_dir: /tmp/deb-build
-        ansible_git_version: stable-2.2
+        ansible_git_version: stable-2.3
 
 - hosts: localhost
   gather_facts: no
