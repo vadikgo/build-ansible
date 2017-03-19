@@ -42,7 +42,7 @@
 
       - block:
         - name: install epel
-          yum: name=https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm
+          yum: name=epel-release
 
         - name: install ansible
           yum: name={{item.path}}
