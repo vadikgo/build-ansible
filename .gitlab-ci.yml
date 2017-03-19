@@ -7,7 +7,7 @@ lint:
   script:
     - ansible-lint -x "ANSIBLE0006" build-centos?-ansible.yml
 ansible-centos6:
-  image: ansible:centos6
+  image: ansible/ansible:centos6
   stage: build
   script:
     - export TAG=$(git ls-remote --tags https://github.com/ansible/ansible.git refs/tags/*-1|tail -1|awk '{print $2}'|cut -d / -f 3)
@@ -17,7 +17,7 @@ ansible-centos6:
     paths:
     - '*.rpm'
 ansible-centos7:
-  image: ansible:centos7
+  image: ansible/ansible:centos7
   stage: build
   script:
     - export TAG=$(git ls-remote --tags https://github.com/ansible/ansible.git refs/tags/*-1|tail -1|awk '{print $2}'|cut -d / -f 3)
