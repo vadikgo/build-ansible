@@ -1,11 +1,23 @@
 ---
 - hosts: localhost
   connection: local
-  gather_facts: yes
+  gather_facts: no
   tasks:
-    - name: application service
-      debug: msg="{{item}} {{users[item][0]}}"
-      with_items: "{{users.keys()}}"
+    - name: create container
+      docker_container:
+        name: php-fpm
+        image: centos:7
+        state: started
+        tty: yes
+
+    - name: start second container
+      docker_container:
+        name: myapp
+        image: centos:7
+        state: started
+        tty: yes
+        links:
+         - "php-fpm:php-server"
   vars:
       users: "{
         '{{ansible_hostname}}-alice': ['par1', 'par2'],
