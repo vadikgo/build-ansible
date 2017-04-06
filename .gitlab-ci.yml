@@ -10,7 +10,7 @@ ansible-centos6:
   image: centos:6
   stage: build
   script:
-    - yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm -y
+    - yum install epel-release -y
     - yum install ansible git -y
     - export TAG=$(git ls-remote --tags https://github.com/ansible/ansible.git refs/tags/*-1|tail -1|awk '{print $2}'|cut -d / -f 3)
     - echo $TAG
@@ -22,7 +22,7 @@ ansible-centos7:
   image: centos:7
   stage: build
   script:
-    - yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm -y
+    - yum install epel-release -y
     - yum install ansible git -y
     - export TAG=$(git ls-remote --tags https://github.com/ansible/ansible.git refs/tags/*-1|tail -1|awk '{print $2}'|cut -d / -f 3)
     - echo $TAG
