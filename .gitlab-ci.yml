@@ -1,5 +1,5 @@
 variables:
-  TAG: stable-2.3
+  TAG: stable-2.4
 stages:
   - lint
   - build
