@@ -16,7 +16,7 @@ ansible-centos6:
     - sh build-sentos6-ansible
   artifacts:
     paths:
-    - 'ansible/rpm-build/*.rpm'
+    - '/ansible/rpm-build/*.rpm'
 ansible-centos7:
   image: centos:7
   stage: build
@@ -24,4 +24,4 @@ ansible-centos7:
     - sh build-sentos7-ansible
   artifacts:
     paths:
-    - 'ansible/rpm-build/*.rpm'
+    - '/ansible/rpm-build/*.rpm'
