@@ -1,0 +1,17 @@
+#!/bin/bash
+
+yum install -y epel-release
+yum install -y yum install -y which asciidoc tar "@Development tools" \
+python-setuptools python2-devel libyaml-devel python-jinja2 python-sphinx \
+python-markupsafe pytest python-pip
+pip install --upgrade Jinja2
+yum install PyYAML -y
+
+git clone https://github.com/ansible/ansible.git --recursive
+cd ansible
+git checkout tags/${ANSIBLE_VERSION}
+sed -i 's/__python2/__python/g' ./packaging/rpm/ansible.spec
+#sed -i '/%clean/a insert' filename
+#cp /ansible/lib/ansible/config/base.yml %{buildroot}%{python_sitelib}/ansible/config/base.yml
+make rpm
+ls rpm-build/*.rpm

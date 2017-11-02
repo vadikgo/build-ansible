@@ -1,3 +1,6 @@
+variables:
+  ANSIBLE_VERSION: v2.4.1.0-1
+
 stages:
   - lint
   - build
@@ -7,30 +10,18 @@ lint:
   script:
     - ansible-lint -x "ANSIBLE0006" build-centos?-ansible.yml
 ansible-centos6:
-  variables:
-    TAG: stable-2.3
   image: centos:6
   stage: build
   script:
-    - yum install epel-release -y
-    - yum install ansible git -y
-    #- export TAG=$(git ls-remote --tags https://github.com/ansible/ansible.git refs/tags/*-1|tail -1|awk '{print $2}'|cut -d / -f 3)
-    - echo $TAG
-    - ansible-playbook build-centos6-ansible.yml -v -e "result_dir=$CI_PROJECT_DIR ansible_git_version=$TAG"
+    - sh build-sentos6-ansible
   artifacts:
     paths:
-    - '*.rpm'
+    - 'ansible/rpm-build/*.rpm'
 ansible-centos7:
-  variables:
-    TAG: stable-2.4
   image: centos:7
   stage: build
   script:
-    - yum install epel-release -y
-    - yum install ansible git -y
-    #- export TAG=$(git ls-remote --tags https://github.com/ansible/ansible.git refs/tags/*-1|tail -1|awk '{print $2}'|cut -d / -f 3)
-    - echo $TAG
-    - ansible-playbook build-centos7-ansible.yml -v -e "result_dir=$CI_PROJECT_DIR ansible_git_version=$TAG"
+    - sh build-sentos7-ansible
   artifacts:
     paths:
-    - '*.rpm'
+    - 'ansible/rpm-build/*.rpm'
