@@ -18,9 +18,15 @@
             - python-sphinx
             - python-markupsafe
             - pytest
+            - python2-pip
 
       - name: create build dir
         file: path={{build_dir}} state=directory
+
+      - name: update jinja2
+        pip:
+          name: Jinja2
+          extra_args: --upgrade
 
       - name: Clone ansible git
         git:
