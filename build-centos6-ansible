@@ -12,6 +12,6 @@ cd ansible
 git checkout tags/${ANSIBLE_VERSION}
 sed -i 's/__python2/__python/g' ./packaging/rpm/ansible.spec
 sed -i '/%clean/i \
-cp /ansible/lib/ansible/config/base.yml %{buildroot}%{python_sitelib}/ansible/config/base.yml' packaging/rpm/ansible.spec
+cp $CI_PROJECT_DIR/ansible/lib/ansible/config/base.yml %{buildroot}%{python_sitelib}/ansible/config/base.yml' packaging/rpm/ansible.spec
 make rpm
 find . -name *.rpm
