@@ -12,4 +12,4 @@ git clone https://github.com/ansible/ansible.git --recursive
 cd ansible
 git checkout tags/${ANSIBLE_VERSION}
 make rpm
-ls rpm-build/*.rpm
+find . -name *.rpm
