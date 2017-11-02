@@ -18,7 +18,7 @@
             - python-sphinx
             - python-markupsafe
             - pytest
-            - python2-pip
+            - python-pip
 
       - name: create build dir
         file: path={{build_dir}} state=directory
