@@ -13,15 +13,17 @@ ansible-centos6:
   image: centos:6
   stage: build
   script:
-    - sh build-sentos6-ansible
+    - sh build-centos6-ansible
+    - mv ./ansible/rpm-build/*.noarch.rpm .
   artifacts:
     paths:
-    - '/ansible/rpm-build/*.rpm'
+    - '*.rpm'
 ansible-centos7:
   image: centos:7
   stage: build
   script:
-    - sh build-sentos7-ansible
+    - sh build-centos7-ansible
+    - mv ./ansible/rpm-build/*.noarch.rpm .
   artifacts:
     paths:
-    - '/ansible/rpm-build/*.rpm'
+    - '*.rpm'
