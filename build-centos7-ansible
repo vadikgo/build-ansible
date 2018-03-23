@@ -10,6 +10,6 @@ yum install PyYAML -y
 
 git clone https://github.com/ansible/ansible.git --recursive
 cd ansible
-git checkout tags/${ANSIBLE_VERSION}
+git checkout tags/${ANSIBLE_VERSION} || git checkout ${ANSIBLE_VERSION} || exit 1
 make rpm
 find . -name *.rpm

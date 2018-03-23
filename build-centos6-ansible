@@ -9,7 +9,7 @@ yum install PyYAML -y
 
 git clone https://github.com/ansible/ansible.git --recursive
 cd ansible
-git checkout tags/${ANSIBLE_VERSION}
+git checkout tags/${ANSIBLE_VERSION} || git checkout ${ANSIBLE_VERSION} || exit 1
 sed -i 's/__python2/__python/g' ./packaging/rpm/ansible.spec
 sed -i '/%clean/i \
 cp $CI_PROJECT_DIR/ansible/lib/ansible/config/base.yml %{buildroot}%{python_sitelib}/ansible/config/base.yml' packaging/rpm/ansible.spec
