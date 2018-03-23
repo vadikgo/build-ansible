@@ -1,5 +1,5 @@
 variables:
-  ANSIBLE_VERSION: v2.5.0
+  ANSIBLE_VERSION: stable-2.5
 
 stages:
   - lint
