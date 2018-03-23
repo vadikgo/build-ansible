@@ -5,7 +5,7 @@ yum install -y epel-release
 yum install -y which asciidoc tar ansible rpm-build \
 python-setuptools python-devel git python-jinja2 libyaml-devel \
 python-sphinx pytest python2-pip
-pip install --upgrade Jinja2
+pip install --upgrade Jinja2 packaging
 yum install PyYAML -y
 
 git clone https://github.com/ansible/ansible.git --recursive
